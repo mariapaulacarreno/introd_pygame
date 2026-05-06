@@ -28,10 +28,11 @@ for i in range(9):
 pygame.draw.rect(ventana, azul, (0, 0, 150, 150))
 
 # cruz blanca
+
 # vertical
-pygame.draw.rect (ventana, blanco, (60, 0, 150, 150))
+pygame.draw.rect (ventana, azul, (60, 0, 30, 150))
 #horizontal
-pygame.draw.rect(ventana, blanco,(0, 60, 150, 30))
+pygame.draw.rect(ventana, azul ,(0, 60, 150, 30))
 
 # actualizar pantalla
 pygame.display.flip()
