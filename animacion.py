@@ -1,52 +1,69 @@
 # importamos la libreria pygame
+
 import pygame
 import sys
 
-# inicializamos los modulos de la librería
+# Inicializar pygame
 pygame.init()
 
-# Establecer dimensiones de la ventana
-ventana = pygame.display.set_mode((400,400))
+# Ventana
+ANCHO = 400
+ALTO = 400
 
-# establecer titulo de la ventana
-pygame.display.set_caption("Rebotes rectángulo")
+ventana = pygame.display.set_mode((ANCHO, ALTO))
+pygame.display.set_caption("Rebotes en todas las esquinas")
 
-# definición colores
-rojo = (255,0,0)
-azul = (0,0,255)
+# Colores
+ROJO = (255, 0, 0)
+AZUL = (0, 0, 255)
 
+# Posición inicial
+x = 100
+y = 100
 
-# variable de movimiento
-XX = 100
-MOVIMIENTO = 10
+# Tamaño del rectángulo
+ancho_rect = 80
+alto_rect = 80
 
-# Objeto para la gestión del tiempo
+# Velocidad
+mov_x = 5
+mov_y = 8
+
+# Reloj
 clock = pygame.time.Clock()
 
-
-# bucle principal del juego
+# Bucle principal
 while True:
-    # Maximo de fotogramas por segundo
-    clock.tick(200)
 
+    clock.tick(60)
+
+    # Eventos
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.quit()
             sys.exit()
 
-    ventana.fill(azul)
+    # Fondo
+    ventana.fill(AZUL)
 
-    # movimiento del rectángulo
-    XX = XX + MOVIMIENTO
+    # Movimiento
+    x += mov_x
+    y += mov_y
 
-    if XX >= 320:
-        XX = 320
-        MOVIMIENTO = -10
-    elif XX <= 0:
-        XX = 0
-        MOVIMIENTO = 10
+    # Rebote izquierda/derecha
+    if x <= 0 or x >= ANCHO - ancho_rect:
+        mov_x *= -1
 
-    # dibujar rectangulo en ventana
-    pygame.draw.rect(ventana, rojo, (XX,100,80,80))
+    # Rebote arriba/abajo
+    if y <= 0 or y >= ALTO - alto_rect:
+        mov_y *= -1
 
-    # actualizar visualización de la ventana
+    # Dibujar rectángulo
+    pygame.draw.rect(
+        ventana,
+        ROJO,
+        (x, y, ancho_rect, alto_rect)
+    )
+
+    # Actualizar pantalla
     pygame.display.flip()
